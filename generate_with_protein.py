@@ -196,7 +196,7 @@ def main(input_path, protein_path, backbone_atoms_only, model,
         ddpm.edm.T = n_steps
 
     if ddpm.center_of_mass == 'anchors' and anchors is None:
-        print(
+        raise Exception(
             'Please pass anchor atoms indices '
             'or use another DiffLinker model that does not require information about anchors'
         )
@@ -205,12 +205,12 @@ def main(input_path, protein_path, backbone_atoms_only, model,
     # Reading input fragments
     extension = input_path.split('.')[-1]
     if extension not in ['sdf', 'pdb', 'mol', 'mol2']:
-        print('Please upload the fragments file in one of the following formats: .pdb, .sdf, .mol, .mol2')
+        raise Exception('Please upload the fragments file in one of the following formats: .pdb, .sdf, .mol, .mol2')
         return
 
     protein_extension = protein_path.split('.')[-1]
     if protein_extension != 'pdb':
-        print('Please upload the protein file in .pdb format')
+        raise Exception('Please upload the protein file in .pdb format')
         return
 
     try:
